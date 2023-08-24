@@ -12,7 +12,6 @@ export function Home() {
         `https://www.themealdb.com/api/json/v1/1/search.php?s=`
       );
       setApiData(data.meals);
-      console.log(data.meals);
     } catch (error) {
       console.log(error);
     }
@@ -26,7 +25,7 @@ export function Home() {
     <>
       <div className="row">
         {apiData.map((ele, index) => (
-          <Link  to={ele.strMeal} className='col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3'>
+          <Link  to={`/recipe/${ele.strMeal}`} className='col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3'>
           <Card key={index} ele={ele} />
           </Link>
         ))}

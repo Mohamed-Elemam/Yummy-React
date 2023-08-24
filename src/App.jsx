@@ -7,6 +7,8 @@ import ContactUs from "./Components/ContactUs";
 import Search from "./Components/Search";
 import Ingredients from "./Components/Ingredients";
 import MealInfo from "./Components/MealInfo";
+import IngredientMeals from "./Components/IngredientMeals/IngredientMeals.jsx";
+import CategoryMeals from "./Components/categoryMeals/categoryMeals .jsx";
 
 export default function App() {
   let routers = createBrowserRouter([
@@ -14,10 +16,12 @@ export default function App() {
         { index: true , element: <Home /> },
         { path: "/search", element: <Search /> },
         { path: "/categories", element: <Categories /> },
+        { path: "/category/:id", element: <CategoryMeals/> },
         { path: "/countries", element: <Countries /> },
         { path: "/ingredients", element: <Ingredients /> },
+        { path: "/ingredients/:id", element: <IngredientMeals /> },
         { path: "/contactUs", element: <ContactUs /> },
-        { path: ":id", element: <MealInfo /> },
+        { path: "/recipe/:id", element: <MealInfo /> },
       ]}
   ]);
 

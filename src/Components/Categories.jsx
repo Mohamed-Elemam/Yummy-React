@@ -1,5 +1,6 @@
 import  React, { useEffect, useState } from 'react' ;
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 export function Categories(){
   const [apiData, setApiData] = useState([]);
@@ -30,7 +31,7 @@ return(
 
 {apiData.map((ele , index)=>(
   
-<div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3" key={index} >
+<Link className="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3" key={index} to={`/category/${ele.strCategory}`} >
   <div className="food rounded-4">
 
       <div className=" ottar">
@@ -42,7 +43,7 @@ return(
             </div>
       </div>
   </div>
-</div>
+</Link>
 
 ))}
 </div>
