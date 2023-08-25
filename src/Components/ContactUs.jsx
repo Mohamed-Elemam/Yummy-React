@@ -10,18 +10,23 @@ export default function ContactUs() {
   const validationSchema = Yup.object({
     name: Yup.string()
       .required("Name is required")
-      .min(5)
-      .max(25, "The name can/'t exceed 25 chrachters"),
+      .min(3 ,"The name can't be less than 3 chrachters")
+      .max(25, "The name can't exceed 25 chrachters"),
     // Special characters and numbers not allowed
     email: Yup.string().required(" Email not valid exemple@yyy.zzz").email(),
-    phone: Yup.string().required("Phone number is required"),
+    phone: Yup.string().required("Phone number is required").matches(/^01[0-9]{8}/,'phone must be egyptain number'),
     // Enter valid Phone Number
-    age: Yup.number().required("Age is required"),
+    age: Yup.number().min(10 , 'Age  must be between 10 and 99').max(99,'Age  must be between 10 and 99').required("Age is required"),
+    //is must be between 10 and 99"
     password: Yup.string()
-      .required("Password is required")
-      .matches(/^[A-Z]/),
-    rePassword: Yup.string()
+    //TODO fix sepelling remove logger and line 28 ? study the side bar // on click submit the modal appear and 
+    //TODO and then all in put are zero put links in .env
+    
+      .required("Password is required ")
+      .matches(/^(?=.*[A-Z])(?=.*[.!@#$%^&*])(?=.*[a-z])(?=.*[0-9]){8,}/,' password must be 8 letters that starts with a capital letter and contain one special charachter and one number'),
+    rePassword: Yup.ref('password')
   });
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -45,26 +50,30 @@ export default function ContactUs() {
         onSubmit={formik.handleSubmit}
       >
         <div className="container  py-5">
-          <div className="mx-auto text-center">
+          <div className="">
             <div className="row my-3 ">
+            {/* name=============================== */}
+
               <div className="col-md-6">
                 <input
                   type="text"
                   placeholder="Enter Your Name "
-                  className="form-control rounded-2 w-75 mx-auto my-3 nameVal"
+                  className="form-control rounded-2 w-75 mx-auto my-3 "
                   id="name"
                   name="name"
-                  maxLength="25" //*  <=== then no need for .max in yup schema
+                  maxLength="25" 
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   value={formik.values.name}
                 />
                 {formik.errors.name && formik.touched.name ? (
-                  <div className="alert alert-danger w-75 mx-auto my-3 ealert">
-                    {formik.errors.name}
+                  <div className="text-danger w-75  my-3 mx-auto mx-auto">
+                    * {formik.errors.name}
                   </div>
                 ) : null}
               </div>
+            {/* email=============================== */}
+
               <div className="col-md-6">
                 <input
                   type="email"
@@ -77,13 +86,15 @@ export default function ContactUs() {
                   value={formik.values.email}
                 />
                 {formik.errors.email && formik.touched.email ? (
-                  <div className="alert alert-danger w-75 mx-auto my-3 ealert">
-                    {formik.errors.email}
+                  <div className="text-danger w-75  my-3 mx-auto  ealert">
+                   * {formik.errors.email}
                   </div>
                 ) : null}
               </div>
             </div>
             <div className="row my-3">
+            {/* phone=============================== */}
+
               <div className="col-md-6">
                 <input
                   type="tel"
@@ -96,16 +107,18 @@ export default function ContactUs() {
                   value={formik.values.phone}
                 />
                 {formik.errors.phone && formik.touched.phone ? (
-                  <div className="alert alert-danger w-75 mx-auto my-3 ealert">
-                    {formik.errors.phone}
+                  <div className="text-danger w-75  my-3 mx-auto  ">
+                   * {formik.errors.phone}
                   </div>
                 ) : null}
               </div>
+            {/* age=============================== */}
+
               <div className="col-md-6">
                 <input
                   type="number"
                   placeholder="Enter Your age "
-                  className="form-control rounded-2 w-75 mx-auto my-3  ageVal"
+                  className="form-control rounded-2 w-75 mx-auto my-3  "
                   id="age"
                   name="age"
                   onBlur={formik.handleBlur}
@@ -114,18 +127,20 @@ export default function ContactUs() {
                 />
 
                 {formik.errors.age && formik.touched.age ? (
-                  <div className="alert alert-danger w-75 mx-auto my-3 ealert">
-                    {formik.errors.age}
+                  <div className="text-danger w-75  my-3 mx-auto  ">
+                   * {formik.errors.age}
                   </div>
                 ) : null}
               </div>
             </div>
+
             <div className="row my-3">
+            {/* password=============================== */}
               <div className="col-md-6">
                 <input
                   type="password"
                   placeholder="Enter Your Password "
-                  className="form-control rounded-2 w-75 mx-auto my-3 password1Val"
+                  className="form-control rounded-2 w-75 mx-auto my-3 "
                   id="password"
                   name="password"
                   onBlur={formik.handleBlur}
@@ -133,23 +148,19 @@ export default function ContactUs() {
                   value={formik.values.password}
                 />
                 {formik.errors.password && formik.touched.password ? (
-                  <div className="alert alert-danger w-75 mx-auto my-3 ealert">
-                    {formik.errors.password}
+                  <div className="text-danger w-75  my-3 mx-auto  ">
+                   * {formik.errors.password}
                   </div>
                 ) : null}
-                <div
-                  className="alert d-none alert-danger w-75 mx-auto my-3 p1alert"
-                  role="alert"
-                >
-                  Enter valid password *Minimum eight characters, at least one
-                  letter and one number:*
-                </div>
+               
               </div>
+
+            {/* re-password=============================== */}
               <div className="col-md-6">
                 <input
                   type="password"
                   placeholder="RePassword "
-                  className="form-control rounded-2 w-75 mx-auto my-3 password2Val"
+                  className="form-control rounded-2 w-75 mx-auto my-3 "
                   id="rePassword"
                   name="rePassword"
                   onBlur={formik.handleBlur}
@@ -158,8 +169,8 @@ export default function ContactUs() {
                 />
 
                 {formik.errors.rePassword && formik.touched.rePassword ? (
-                  <div className="alert alert-danger w-75 mx-auto my-3 ealert">
-                    {formik.errors.rePassword}
+                  <div className="text-danger w-75  my-3 mx-auto  ">
+                   * {formik.errors.rePassword}
                   </div>
                 ) : null}
               </div>
@@ -168,7 +179,7 @@ export default function ContactUs() {
               className="btn btn-outline-danger d-block my-3 mx-auto my-3 "
               // onSubmit={formik.handleSubmit}
               type="submit"
-              disabled={formik.isValid && !formik.dirty}
+              disabled={formik.isValid &&!formik.dirty}
             >
               Submit
             </button>

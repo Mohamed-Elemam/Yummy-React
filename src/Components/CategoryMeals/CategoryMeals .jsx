@@ -11,7 +11,7 @@ export default function CategoryMeals() {
     async function getCategoryMeals(categoryId) {
       try {
         let { data } = await axios.get(
-          `www.themealdb.com/api/json/v1/1/filter.php?c=${categoryId}`
+          `http://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryId}`
         );
         setApiData(data.meals);
       } catch (error) {
@@ -25,9 +25,10 @@ export default function CategoryMeals() {
   
     return (
       <>
-      {id}
+      
+      <h2>{id} recipes</h2>
         <div className="row">
-          {apiData.map((ele, index) => (
+          {apiData?.map((ele, index) => (
             <Link  key={index} to={`/recipe/${ele.strMeal}`} className='col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3'>
             <Card ele={ele} />
             </Link>

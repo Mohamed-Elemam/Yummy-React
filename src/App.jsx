@@ -16,7 +16,7 @@ export default function App() {
         { index: true , element: <Home /> },
         { path: "/search", element: <Search /> },
         { path: "/categories", element: <Categories /> },
-        { path: "/category/:id", element: <CategoryMeals/> },
+        { path: "/categories/:id", element: <CategoryMeals/> },
         { path: "/countries", element: <Countries /> },
         { path: "/ingredients", element: <Ingredients /> },
         { path: "/ingredients/:id", element: <IngredientMeals /> },

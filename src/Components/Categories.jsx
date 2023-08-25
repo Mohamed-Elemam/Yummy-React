@@ -29,16 +29,16 @@ return(
 <>
 <div className="row">
 
-{apiData.map((ele , index)=>(
+{apiData?.map((ele )=>(
   
-<Link className="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3" key={index} to={`/category/${ele.strCategory}`} >
+<Link className="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3" key={ele.idCategory} to={`/categories/${ele.strCategory}`} >
   <div className="food rounded-4">
 
       <div className=" ottar">
           <img src={ele.strCategoryThumb} alt="food"/ >
           <div className="innerself d-flex  align-items-center justify-content-center flex-column" style={{color:"#000", overflow:"hidden"}}>
               <p >{ele.strCategory}</p>
-              <p style={styles}>{ele.strCategoryDescription}</p>
+              <p style={styles}>{ele.strCategoryDescription?.split(" ").slice(0, 20).join(" ")}</p>
               
             </div>
       </div>

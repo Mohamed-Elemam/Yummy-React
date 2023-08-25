@@ -1,5 +1,5 @@
 import React, {  useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { VscChromeClose } from "react-icons/vsc";
 import { VscMenu } from "react-icons/vsc";
@@ -24,39 +24,38 @@ const menuItems= [
 ]
   return (
     <>
-      <div className="sidebar">
+      <div className="sidebar ">
       {/* <div  > */}
-        <div className="innerbar "  style={{width: isopen ? "0px" :"200px" }}>
+        <div className="innerbar d-flex flex-column justify-content-between"  style={{width: isopen ? "0px" :"200px" }}>
           <ul className="nav nav-pills flex-column my-5 mx-3" >
 <li>
-{menuItems.map((ele , index)=> (
-  <NavLink to={ele.path} className="nav-link " aria-current="page" key ={index} onClick={closeSidebar} >
-                {ele.name}
+{menuItems.map((menuItem , index)=> (
+  <NavLink to={menuItem.path} className="nav-link " aria-current="page" key ={index}  >
+                {menuItem.name}
               </NavLink>
 ))}
 </li>
           </ul>
-          <hr />
   {/* TODO ?? */}
           
-          {/* <div className="px-4 my-3">
+          <div className="px-4 my-3">
             <div>
               <i className="fa-brands fa-facebook-f"></i>
               <i className="fa-brands fa-twitter mx-3"></i>
               <i className="fas fa-globe"></i>
             </div>
             <p>Copyright © 2023 All Rights Reserved.</p>
-          </div> */}
+          </div>
         </div>
 
         <div
           className="outterbar bg-light text-black d-flex  justify-content-between flex-column"
-onClick={closeSidebar}       >
-          <div>
+ >
+          <Link to={'/'}>
             <img src={logo} className="my-5" alt="logo" />
-          </div>
+          </Link>
           <div>
-            <i className={` fs-1 mb-5 fs-2 mx-2  ` }>
+            <i className={` fs-1 mb-5 fs-2 mx-2  ` } onClick={closeSidebar}      >
            {isopen?  <VscMenu/> :  <VscChromeClose/>}
             </i>
          

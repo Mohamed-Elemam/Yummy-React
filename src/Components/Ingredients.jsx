@@ -30,24 +30,23 @@ export default function Ingredients() {
 
     <>
 
+<div className="row">
 
  {apiData.map((ele , index )=>( 
 
    <div key = {index} style={{overflow:"hidden", cursor:"pointer"}} className="col-sm-12 col-md-6 col-lg-4 col-xl-3  my-2 text-center" onclick='chooseIngredient("${result.meals[i].strIngredient}")'>
-   <Link >
+   <Link to={`/ingredients/${ele.strIngredient}`}>
     <div className="county"> 
     <i className="fas fa-drumstick-bite"  ></i>
-    {/* style="font-size:64px" */}
     <p >{ele.strIngredient}</p>
-    {/* style={{font-size:"24.784px",font-weight:"500"}} */}
-    <p  >{ele.strDescription}</p>
-    {/* style={{max-height:"50px",font-weight:"500",font-size:"18px",overflow:"hidden"}} */}
+    <p  >{ele?.strDescription?.split(' ').slice(0,25).join(' ')}</p>
     </div>
     </Link>
     </div>
     
+    ))} 
+    </div>
 
-))} 
       
     
     </>
