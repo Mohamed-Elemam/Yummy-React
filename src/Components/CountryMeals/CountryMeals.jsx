@@ -3,36 +3,37 @@ import axios from "axios";
 import Card from "../Card/Card.jsx";
 import { Link, useParams } from "react-router-dom";
 
-export default function CategoryMeals() {
+export default function CountryMeals() {
     const [apiData, setApiData] = useState([]);
     const {id} = useParams()
 
 
-    async function getCategoryMeals(categoryId) {
+    async function getCountryMeals(countryId) {
       try {
         let { data } = await axios.get(
-          `http://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryId}`
+          `https://www.themealdb.com/api/json/v1/1/filter.php?a=${countryId}`
         );
-        setApiData(data.meals);
+        setApiData(data.meals)
       } catch (error) {
         console.log(error);
       }
-    }
+    } 
   
     useEffect(() => {
-        getCategoryMeals(id)
+        getCountryMeals(id)
     }, [id]);
   
     return (
       <>
-      
-      <h2>{id} recipes</h2>
         <div className="row">
+      <h2>{id} recipes</h2>
           {apiData?.map((ele, index) => (
-            <Link  key={index} to={`/recipe/${ele.strMeal}`} className='col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3'>
-            <Card ele={ele} />
+            <Link  to={`/recipe/${ele.strMeal}`} key={index} className='col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3'>
+            <Card key={index} ele={ele} />
             </Link>
           ))}
         </div>
-      </>)}
+      </>)
+}
+
 

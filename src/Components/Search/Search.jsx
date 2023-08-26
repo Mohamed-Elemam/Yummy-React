@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Card from "./Card";
+import Card from "../Card/Card";
 import { Link } from "react-router-dom";
 
 export default function Search() {
@@ -39,7 +39,7 @@ export default function Search() {
         <div className="col-md-6 my-2">
           <input
             type="text"
-            className="form-control bg-transparent rounded-2 text-white"
+            className="form-control  rounded-2 searchInput"
             placeholder="Search By Meal Name"
             onChange={wordSpy}
           />
@@ -47,7 +47,7 @@ export default function Search() {
         <div className="col-md-6 my-2">
           <input
             type="text"
-            className="form-control bg-transparent rounded-2 text-white"
+            className="form-control  rounded-2 searchInput"
             placeholder="Search By Meal First Letter"
             maxLength="1"
             onChange={charSpy}
@@ -56,16 +56,16 @@ export default function Search() {
       </div>
       {
         <div className="row">
-          {apiData
-            ? apiData.map((ele, index) => (
-                <Link
-                  to={ele.strMeal}
-                  className="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3"
-                >
-                  <Card key={index} ele={ele} />
-                </Link>
-              ))
-            : "loading..."}
+          {apiData ===null 
+            ? <h2 className="d-flex justify-content-center align-items-center my-5 " >No meals found</h2>
+            : apiData.map((ele, index) => (
+              <Link
+                to={ele.strMeal} key={index}
+                className="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3"
+              >
+                <Card  ele={ele} />
+              </Link>
+            ))}
         </div>
       }
     </>

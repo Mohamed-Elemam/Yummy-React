@@ -1,6 +1,6 @@
 import React, {  useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import logo from "../assets/logo.png";
+// import logo from "src/assets/logo.png";
 import { VscChromeClose } from "react-icons/vsc";
 import { VscMenu } from "react-icons/vsc";
 
@@ -25,18 +25,16 @@ const menuItems= [
   return (
     <>
       <div className="sidebar ">
-      {/* <div  > */}
-        <div className="innerbar d-flex flex-column justify-content-between"  style={{width: isopen ? "0px" :"200px" }}>
+        <div className="innerbar d-flex flex-column justify-content-between"  style={{width: isopen ? "0px" :"240px" }}>
           <ul className="nav nav-pills flex-column my-5 mx-3" >
 <li>
 {menuItems.map((menuItem , index)=> (
-  <NavLink to={menuItem.path} className="nav-link " aria-current="page" key ={index}  >
+  <NavLink to={menuItem.path} className="nav-link " aria-current="page" key ={index} onClick={closeSidebar}  >
                 {menuItem.name}
               </NavLink>
 ))}
 </li>
           </ul>
-  {/* TODO ?? */}
           
           <div className="px-4 my-3">
             <div>
@@ -52,7 +50,7 @@ const menuItems= [
           className="outterbar bg-light text-black d-flex  justify-content-between flex-column"
  >
           <Link to={'/'}>
-            <img src={logo} className="my-5" alt="logo" />
+            <img src={'src/assets/logo.png'} className="my-5" alt="logo" />
           </Link>
           <div>
             <i className={` fs-1 mb-5 fs-2 mx-2  ` } onClick={closeSidebar}      >
@@ -60,7 +58,6 @@ const menuItems= [
             </i>
          
           </div>
-  {/* TODO remove those  */}
 
           <div className="mx-2 px-2 my-5">
             <i className="fas fa-globe"></i>

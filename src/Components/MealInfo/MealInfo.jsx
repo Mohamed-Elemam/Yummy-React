@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
@@ -12,7 +12,6 @@ export default function MealInfo() {
     let { data } = await axios.get(
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${id}`
     );
-    console.log(data.meals);
     setMealData(data.meals);
   }
   useEffect(() => {
@@ -29,6 +28,7 @@ export default function MealInfo() {
                   <img src={ele.strMealThumb} className="w-75 my-3 rounded-2" />
 
                   <h1> {ele.strMeal} </h1>
+                  <Link className="btn btn-warning text-center w-75 mx-auto" to={'/'}>Back to home</Link>
                 </div>
               </div>
             </div>
@@ -46,31 +46,31 @@ export default function MealInfo() {
               <h2>Recipes :</h2>
               <ul className="list-unstyled d-flex g-3 flex-wrap">
                 <li className="alert alert-info m-2 p-1">
-                  {" "}
-                  {ele.strMeasure1} {ele.strIngredient1}{" "}
+                
+                  {ele.strMeasure1} {ele.strIngredient1}
                 </li>
                 <li className="alert alert-info m-2 p-1">
-                  {" "}
-                  {ele.strMeasure2} {ele.strIngredient2}{" "}
+                
+                  {ele.strMeasure2} {ele.strIngredient2}
                 </li>
                 <li className="alert alert-info m-2 p-1">
-                  {" "}
-                  {ele.strMeasure3} {ele.strIngredient3}{" "}
+                
+                  {ele.strMeasure3} {ele.strIngredient3}
                 </li>
                 <li className="alert alert-info m-2 p-1">
-                  {" "}
-                  {ele.strMeasure4} {ele.strIngredient4}{" "}
+                
+                  {ele.strMeasure4} {ele.strIngredient4}
                 </li>
                 <li className="alert alert-info m-2 p-1">
-                  {" "}
-                  {ele.strMeasure5} {ele.strIngredient5}{" "}
+                
+                  {ele.strMeasure5} {ele.strIngredient5}
                 </li>
                 <li className="alert alert-info m-2 p-1">
-                  {" "}
-                  {ele.strMeasure6} {ele.strIngredient6}{" "}
+                  
+                  {ele.strMeasure6} {ele.strIngredient6}
                 </li>
                 <li className="alert alert-info m-2 p-1">
-                  {" "}
+                  
                   {ele.strMeasure7} {ele.strIngredient7}
                 </li>
                 <li className="alert alert-info m-2 p-1">
@@ -78,10 +78,10 @@ export default function MealInfo() {
                   {ele.strMeasure8} {ele.strIngredient8}
                 </li>
               </ul>
-              <h2>Tags :</h2>
+              {/* <h2>Tags :</h2>
               <ul className="list-unstyled d-flex g-3 flex-wrap">
                 <li className="alert alert-danger my-2 p-1"> {ele.strTags} </li>
-              </ul>
+              </ul> */}
               <a href= {ele.strSource} className="btn btn-success me-3">
                 Source
               </a>
