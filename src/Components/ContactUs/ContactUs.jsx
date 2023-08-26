@@ -10,8 +10,8 @@ export default function ContactUs() {
   const validationSchema = Yup.object({
     name: Yup.string()
       .required("Name is required")
-      .min(3 ,"The name can't be less than 3 chrachters")
-      .max(25, "The name can't exceed 25 chrachters"),
+      .min(3 ,"The name can't be less than 3 characters")
+      .max(25, "The name can't exceed 25 characters"),
     // Special characters and numbers not allowed
     email: Yup.string().required(" Email not valid exemple@yyy.zzz").email(),
     phone: Yup.string().required("Phone number is required").matches(/^01[0-9]{8}/,'phone must be egyptain number'),

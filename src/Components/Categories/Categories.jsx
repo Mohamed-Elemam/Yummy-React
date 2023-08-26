@@ -6,15 +6,13 @@ export function Categories(){
   const [apiData, setApiData] = useState([]);
   const styles = {
     fontSize: '16px',
-    // display: '-webkit-box',
     WebkitLineClamp: 3,
-    // WebkitBoxOrient: 'vertical',
     overflow: 'hidden'
   };
  
   async function getCategories() {
     let {data} = await axios.get(
-      `https://www.themealdb.com/api/json/v1/1/categories.php`
+      import.meta.env.VITE_API_LINK_GET_ALL_CATEGORIES
     );
     setApiData(data.categories);
   }

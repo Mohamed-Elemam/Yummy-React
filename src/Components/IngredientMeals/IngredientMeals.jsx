@@ -11,7 +11,7 @@ export default function IngredientMeals() {
     async function getIngredientMeals(IngredientId) {
       try {
         let { data } = await axios.get(
-          `https://www.themealdb.com/api/json/v1/1/filter.php?i=${IngredientId}`
+          import.meta.env.VITE_API_LINK_GET_INGREDIENT_MEALS+IngredientId
         );
         setApiData(data.meals)
       } catch (error) {
@@ -26,7 +26,7 @@ export default function IngredientMeals() {
     return (
       <>
         <div className="row">
-          <h2>{id} recipes</h2>
+          <h2>{id} meals</h2>
           {apiData?.map((ele, index) => (
             <Link  to={`/recipe/${ele.strMeal}`} key={index} className='col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3'>
             <Card key={index} ele={ele} />

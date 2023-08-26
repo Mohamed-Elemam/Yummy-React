@@ -9,7 +9,7 @@ export function Home() {
   async function getDishs() {
     try {
       let { data } = await axios.get(
-        `https://www.themealdb.com/api/json/v1/1/search.php?s=`
+       import.meta.env.VITE_API_LINK_GET_ALL_MEALS
       );
       setApiData(data.meals);
     } catch (error) {

@@ -10,6 +10,7 @@ import MealInfo from "./Components/MealInfo/MealInfo";
 import IngredientMeals from "./Components/IngredientMeals/IngredientMeals.jsx";
 import CategoryMeals from "./Components/categoryMeals/categoryMeals .jsx";
 import CountryMeals from "./Components/CountryMeals/CountryMeals.jsx";
+import NotFound from "./Components/NotFound/NotFound.jsx";
 
 export default function App() {
   let routers = createBrowserRouter([
@@ -24,6 +25,7 @@ export default function App() {
         { path: "/ingredients/:id", element: <IngredientMeals /> },
         { path: "/contactUs", element: <ContactUs /> },
         { path: "/recipe/:id", element: <MealInfo /> },
+        { path: "*", element: <NotFound /> },
       ]}
   ]);
 

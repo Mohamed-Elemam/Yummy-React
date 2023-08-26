@@ -10,8 +10,7 @@ export default function Ingredients() {
   async function getIngredient() {
     try {
       let { data } = await axios.get(
-        `https://www.themealdb.com/api/json/v1/1/list.php?i=list
-        `
+        import.meta.env.VITE_API_LINK_GET_ALL_INGREDIENTS
       );
       console.log(data);
       

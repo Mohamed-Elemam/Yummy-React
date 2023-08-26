@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 export default function Search() {
   const [apiData, setApiData] = useState([]);
-  const [char, setChar] = useState("");
 
 
 
@@ -20,11 +19,8 @@ export default function Search() {
     }
   }
  
-  //TODO so the search doesnt look bad when load
-  // useEffect(() => {
-  //   getDishs();
-  // }, []);
-  //TODO when remove value shold add spinner ?
+  
+  //TODO when remove value shold add spinner 
 
   const wordSpy = (event) => {
     generalSearch('https://www.themealdb.com/api/json/v1/1/search.php?s=',event.target.value);

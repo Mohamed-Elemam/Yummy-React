@@ -11,7 +11,7 @@ export default function CategoryMeals() {
     async function getCategoryMeals(categoryId) {
       try {
         let { data } = await axios.get(
-          `http://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryId}`
+          import.meta.env.VITE_API_LINK_GET_MEAL_DETAILS +categoryId
         );
         setApiData(data.meals);
       } catch (error) {

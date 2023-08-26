@@ -8,7 +8,7 @@ export function Countries() {
   async function getDishs() {
     try {
       let { data } = await axios.get(
-        `https://www.themealdb.com/api/json/v1/1/list.php?a=list/`
+        import.meta.env.VITE_API_LINK_GET_ALL_COUNTRIES
       );
       setApiData(data.meals);
     } catch (error) {
@@ -22,19 +22,25 @@ export function Countries() {
 
   return (
     <>
-<div className="row">
-
-      {apiData.map((ele, index) => (
-      <Link to={`/countries/${ele.strArea}`} className="col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center pointer" key = {index} >
-      <div className="county"> 
-          <i className="fas fa-house-laptop"style={{fontSize:"64px"}} ></i>
-          <p style={{fontSize:"24.784px" , fontWeight:"500"}}>{ele.strArea}</p>
+      <div className="row">
+        {apiData.map((ele, index) => (
+          <Link
+            to={`/countries/${ele.strArea}`}
+            className="col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center pointer"
+            key={index}
+          >
+            <div className="county">
+              <i
+                className="fas fa-house-laptop"
+                style={{ fontSize: "64px" }}
+              ></i>
+              <p style={{ fontSize: "24.784px", fontWeight: "500" }}>
+                {ele.strArea}
+              </p>
+            </div>
+          </Link>
+        ))}
       </div>
-  </Link>
-  
-      ))}
-</div>
-
     </>
   );
 }

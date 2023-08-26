@@ -1,6 +1,6 @@
 import React, {  useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-// import logo from "src/assets/logo.png";
+import logo from '../../../public/logo.png';
 import { VscChromeClose } from "react-icons/vsc";
 import { VscMenu } from "react-icons/vsc";
 
@@ -14,13 +14,12 @@ setIsOpen (!isopen)
  
   
 const menuItems= [
-  //TODO remove icon: ' a'
-{path: "/" , name: "Home" ,icon: ' a'},
-{path: "/search" , name: "Search" ,icon: ' a'},
-{path: "/categories" , name: "Categories" ,icon: ' a'},
-{path: "/countries" , name: "Countries" ,icon: ' a'},
-{path: "/ingredients" , name: "Ingredients" ,icon: ' a'},
-{path: "/contactUs" , name: "ContactUs" ,icon: ' a'},
+{path: "/" , name: "Home"},
+{path: "/search" , name: "Search"},
+{path: "/categories" , name: "Categories"},
+{path: "/countries" , name: "Countries"},
+{path: "/ingredients" , name: "Ingredients"},
+{path: "/contactUs" , name: "ContactUs"},
 ]
   return (
     <>
@@ -50,7 +49,7 @@ const menuItems= [
           className="outterbar bg-light text-black d-flex  justify-content-between flex-column"
  >
           <Link to={'/'}>
-            <img src={'src/assets/logo.png'} className="my-5" alt="logo" />
+            <img src={logo} className="my-5" alt="logo" />
           </Link>
           <div>
             <i className={` fs-1 mb-5 fs-2 mx-2  ` } onClick={closeSidebar}      >
