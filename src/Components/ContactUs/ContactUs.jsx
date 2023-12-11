@@ -1,30 +1,40 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Swal from "sweetalert2";
 
 export default function ContactUs() {
-  const logger = () => {
-    console.log(formik.values);
+  const handleSubmit = () => {
+    Swal.fire({
+      title: "Thank you for contacting us",
+      text: "We will reach you soon",
+      icon: "success",
+    });
+    formik.resetForm();
   };
 
   const validationSchema = Yup.object({
     name: Yup.string()
       .required("Name is required")
-      .min(3 ,"The name can't be less than 3 characters")
+      .min(3, "The name can't be less than 3 characters")
       .max(25, "The name can't exceed 25 characters"),
-    // Special characters and numbers not allowed
     email: Yup.string().required(" Email not valid exemple@yyy.zzz").email(),
-    phone: Yup.string().required("Phone number is required").matches(/^01[0-9]{8}/,'phone must be egyptain number'),
-    // Enter valid Phone Number
-    age: Yup.number().min(10 , 'Age  must be between 10 and 99').max(99,'Age  must be between 10 and 99').required("Age is required"),
-    //is must be between 10 and 99"
+    phone: Yup.string()
+      .required("Phone number is required")
+      .matches(/^01[0-9]{8}/, "phone must be egyptain number"),
+    age: Yup.number()
+      .min(10, "Age must be between 10 and 99")
+      .max(99, "Age must be between 10 and 99")
+      .required("Age is required"),
     password: Yup.string()
-    //TODO fix sepelling remove logger and line 28 ? study the side bar // on click submit the modal appear and 
-    //TODO and then all in put are zero put links in .env
-    
       .required("Password is required ")
-      .matches(/^(?=.*[A-Z])(?=.*[.!@#$%^&*])(?=.*[a-z])(?=.*[0-9]){8,}/,' password must be 8 letters that starts with a capital letter and contain one special charachter and one number'),
-    rePassword: Yup.ref('password')
+      .matches(
+        /^(?=.*[A-Z])(?=.*[.!@#$%^&*])(?=.*[a-z])(?=.*[0-9]){8,}/,
+        " password must be 8 letters that starts with a capital letter and contain one special charachter and one number"
+      ),
+    rePassword: Yup.string()
+      .oneOf([Yup.ref("password"), null, "password and repassword must match"])
+      .required("repassword is required"),
   });
 
   const formik = useFormik({
@@ -34,14 +44,11 @@ export default function ContactUs() {
       phone: "",
       age: "",
       password: "",
-      rePassword: ""
+      rePassword: "",
     },
     validationSchema,
-    onSubmit: logger
+    onSubmit: handleSubmit,
   });
-
-  // console.log(formik)
-  // useEffect( logger ,[])
 
   return (
     <>
@@ -50,10 +57,8 @@ export default function ContactUs() {
         onSubmit={formik.handleSubmit}
       >
         <div className="container  py-5">
-          <div className="">
+          <div>
             <div className="row my-3 ">
-            {/* name=============================== */}
-
               <div className="col-md-6">
                 <input
                   type="text"
@@ -61,7 +66,7 @@ export default function ContactUs() {
                   className="form-control rounded-2 w-75 mx-auto my-3 "
                   id="name"
                   name="name"
-                  maxLength="25" 
+                  maxLength="25"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   value={formik.values.name}
@@ -72,7 +77,7 @@ export default function ContactUs() {
                   </div>
                 ) : null}
               </div>
-            {/* email=============================== */}
+              {/* email=============================== */}
 
               <div className="col-md-6">
                 <input
@@ -87,13 +92,13 @@ export default function ContactUs() {
                 />
                 {formik.errors.email && formik.touched.email ? (
                   <div className="text-danger w-75  my-3 mx-auto  ealert">
-                   * {formik.errors.email}
+                    * {formik.errors.email}
                   </div>
                 ) : null}
               </div>
             </div>
             <div className="row my-3">
-            {/* phone=============================== */}
+              {/* phone=============================== */}
 
               <div className="col-md-6">
                 <input
@@ -108,11 +113,11 @@ export default function ContactUs() {
                 />
                 {formik.errors.phone && formik.touched.phone ? (
                   <div className="text-danger w-75  my-3 mx-auto  ">
-                   * {formik.errors.phone}
+                    * {formik.errors.phone}
                   </div>
                 ) : null}
               </div>
-            {/* age=============================== */}
+              {/* age=============================== */}
 
               <div className="col-md-6">
                 <input
@@ -128,14 +133,14 @@ export default function ContactUs() {
 
                 {formik.errors.age && formik.touched.age ? (
                   <div className="text-danger w-75  my-3 mx-auto  ">
-                   * {formik.errors.age}
+                    * {formik.errors.age}
                   </div>
                 ) : null}
               </div>
             </div>
 
             <div className="row my-3">
-            {/* password=============================== */}
+              {/* password=============================== */}
               <div className="col-md-6">
                 <input
                   type="password"
@@ -149,13 +154,12 @@ export default function ContactUs() {
                 />
                 {formik.errors.password && formik.touched.password ? (
                   <div className="text-danger w-75  my-3 mx-auto  ">
-                   * {formik.errors.password}
+                    * {formik.errors.password}
                   </div>
                 ) : null}
-               
               </div>
 
-            {/* re-password=============================== */}
+              {/* re-password=============================== */}
               <div className="col-md-6">
                 <input
                   type="password"
@@ -170,7 +174,7 @@ export default function ContactUs() {
 
                 {formik.errors.rePassword && formik.touched.rePassword ? (
                   <div className="text-danger w-75  my-3 mx-auto  ">
-                   * {formik.errors.rePassword}
+                    * {formik.errors.rePassword}
                   </div>
                 ) : null}
               </div>
@@ -179,7 +183,7 @@ export default function ContactUs() {
               className="btn btn-outline-danger d-block my-3 mx-auto my-3 "
               // onSubmit={formik.handleSubmit}
               type="submit"
-              disabled={formik.isValid &&!formik.dirty}
+              disabled={!formik.isValid || !formik.dirty}
             >
               Submit
             </button>
@@ -189,3 +193,28 @@ export default function ContactUs() {
     </>
   );
 }
+
+// <!-- Button trigger modal -->
+// <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+//   Launch demo modal
+// </button>
+
+// <!-- Modal -->
+// <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+//   <div class="modal-dialog" role="document">
+//     <div class="modal-content">
+//       <div class="modal-header">
+//         <h5 class="modal-title" id="exampleModalLabel">Thank you</h5>
+//         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+//           <span aria-hidden="true">&times;</span>
+//         </button>
+//       </div>
+//       <div class="modal-body">
+// Thank you for contacting us
+//       </div>
+//       <div class="modal-footer">
+//         <button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
+//       </div>
+//     </div>
+//   </div>
+// </div>
