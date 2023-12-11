@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 
 export default function MealInfo() {
   let { id } = useParams();
-  console.log(id);
 
   const [mealData, setMealData] = useState([]);
   async function getInfo() {
@@ -13,22 +12,45 @@ export default function MealInfo() {
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${id}`
     );
     setMealData(data.meals);
+    // console.log(data.meals[0]);
   }
   useEffect(() => {
-    getInfo()
+    getInfo();
   }, []);
+console.log(mealData.at(0))
+const Recipes =()=>{
+
+  return(
+    <ul className="list-unstyled d-flex g-3 flex-wrap">
+    {
+      mealData.at(0)?.forEach(key => {
+        <li className="alert alert-info m-2 p-1">
+          {key.strMeasure1} {key.strIngredient1}
+        </li>
+
+})
+}
+</ul>
+  )
+}
+
   return (
     <>
       <div className="row">
-        {mealData.map((ele, index) => (
+        {mealData?.map((ele) => 
           <>
-            <div className="col-md-4" key={index}>
+            <div className="col-md-4" key={ele.idMeal}>
               <div className=" rounded-4">
-                <div className=" ottar">
+                <div className=" meal-card">
                   <img src={ele.strMealThumb} className="w-75 my-3 rounded-2" />
 
                   <h1> {ele.strMeal} </h1>
-                  <Link className="btn btn-warning text-center w-75 mx-auto" to={'/'}>Back to home</Link>
+                  <Link
+                    className="btn btn-warning text-center w-75 mx-auto"
+                    to={"/"}
+                  >
+                    Back to home
+                  </Link>
                 </div>
               </div>
             </div>
@@ -44,45 +66,38 @@ export default function MealInfo() {
                 <span className="h4"> {ele.strCategory}</span>
               </div>
               <h2>Recipes :</h2>
-              <ul className="list-unstyled d-flex g-3 flex-wrap">
+              <Recipes/>
+              {/* <ul className="list-unstyled d-flex g-3 flex-wrap">
                 <li className="alert alert-info m-2 p-1">
-                
                   {ele.strMeasure1} {ele.strIngredient1}
                 </li>
                 <li className="alert alert-info m-2 p-1">
-                
                   {ele.strMeasure2} {ele.strIngredient2}
                 </li>
                 <li className="alert alert-info m-2 p-1">
-                
                   {ele.strMeasure3} {ele.strIngredient3}
                 </li>
                 <li className="alert alert-info m-2 p-1">
-                
                   {ele.strMeasure4} {ele.strIngredient4}
                 </li>
                 <li className="alert alert-info m-2 p-1">
-                
                   {ele.strMeasure5} {ele.strIngredient5}
                 </li>
                 <li className="alert alert-info m-2 p-1">
-                  
                   {ele.strMeasure6} {ele.strIngredient6}
                 </li>
                 <li className="alert alert-info m-2 p-1">
-                  
                   {ele.strMeasure7} {ele.strIngredient7}
                 </li>
                 <li className="alert alert-info m-2 p-1">
-                  
                   {ele.strMeasure8} {ele.strIngredient8}
                 </li>
-              </ul>
+              </ul> */}
               {/* <h2>Tags :</h2>
               <ul className="list-unstyled d-flex g-3 flex-wrap">
                 <li className="alert alert-danger my-2 p-1"> {ele.strTags} </li>
               </ul> */}
-              <a href= {ele.strSource} className="btn btn-success me-3">
+              <a href={ele.strSource} className="btn btn-success me-3">
                 Source
               </a>
               <a href={ele.strYoutube} className="btn btn-danger me-3">
@@ -90,7 +105,7 @@ export default function MealInfo() {
               </a>
             </div>
           </>
-        ))}
+        )}
       </div>
     </>
   );
@@ -100,7 +115,7 @@ export default function MealInfo() {
   /* <div className="col-md-4">
 <div className=" rounded-4">
 
-    <div className=" ottar">
+    <div className=" meal-card">
         <img src={mealData.strMealThumb} className="w-75 my-3" />
 
             <h1 > {mealData.strMeal}  </h1>

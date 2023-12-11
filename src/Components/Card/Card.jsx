@@ -3,12 +3,12 @@ import React from 'react'
 export default function Card({ele }) {
   return (
    <>
-    <div className="" >
+    <div  >
       
           <div className="food rounded-4">
-            <div className=" ottar">
+            <div className=" meal-card">
               <img src={ele.strMealThumb} alt="food" />
-              <div className=" innerself" style={{ color: "#000" }}>
+              <div className=" card-layer" style={{ color: "#000" }}>
                 <p> {ele.strMeal} </p>
               </div>
             </div>

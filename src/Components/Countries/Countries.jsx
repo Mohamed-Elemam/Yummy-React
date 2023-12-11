@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import LoadingSpinner from "./../LoadingSpinner/LoadingSpinner";
 export function Countries() {
   const [apiData, setApiData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   async function getDishs() {
     try {
+      setLoading(true);
+
       let { data } = await axios.get(
         import.meta.env.VITE_API_LINK_GET_ALL_COUNTRIES
       );
       setApiData(data.meals);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -20,6 +25,9 @@ export function Countries() {
     getDishs();
   }, []);
 
+  if (loading) {
+    return <LoadingSpinner />;
+  }
   return (
     <>
       <div className="row">
